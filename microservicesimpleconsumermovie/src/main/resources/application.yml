@@ -1,0 +1,20 @@
+server:
+  port: 8010
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    version: 1.0.0
+    test: test
+    java:
+      source: @java.version@
+      target: @java.version@
+manager:
+  endpoints:
+    web:
+      exposure:
+        include: all
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
