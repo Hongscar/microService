@@ -18,6 +18,7 @@
     <modules>
         <module>microservicesimpleprovideruser</module>
         <module>microservicesimpleconsumermovie</module>
+        <module>microserviceeureka</module>
     </modules>
 
 
