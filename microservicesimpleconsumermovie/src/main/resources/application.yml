@@ -18,3 +18,8 @@ manager:
       show-details: always
     shutdown:
       enabled: true
+#spring:
+#  cloud:
+#    service-registry:
+#      auto-registration:
+#        enabled: false   确实可以禁止服务注册到 Eureka
