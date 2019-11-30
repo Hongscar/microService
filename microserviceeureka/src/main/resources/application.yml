@@ -1,28 +1,18 @@
-#server:
-#  port: 8761
-#eureka:
-#  client:
-#    registerWithEureka: false
-#    fetchRegistry: false
-#    serviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
 spring:
   application:
-    name: microservice-discovery-eureka-ha
+    name: microervice-discovery-eureka-ha
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:8762/eureka/, http://peer1:8761/eureka/
 ---
 spring:
-  # 指定 profile = peer1
   profiles: peer1
 server:
   port: 8761
 eureka:
   instance:
-    # 指定当 profile = peer1时,主机名是peer1
     hostname: peer1
-  client:
-    serviceUrl:
-      # 将自己注册到 peer2这个Eureka上面去
-      defaultZone: http://peer2:8762/eureka/
 ---
 spring:
   profiles: peer2
@@ -31,6 +21,3 @@ server:
 eureka:
   instance:
     hostname: peer2
-  client:
-    serviceUrl:
-      defaultZone: http://peer1:8761/eureka/
