@@ -9,8 +9,5 @@
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar!/" />
     </SOURCES>
-    <excluded>
-      <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar!/" />
-    </excluded>
   </library>
 </component>

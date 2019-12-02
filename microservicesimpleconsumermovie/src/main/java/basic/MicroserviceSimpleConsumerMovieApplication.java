@@ -1,9 +1,15 @@
 package basic;
 
+import com.netflix.discovery.DiscoveryClient.DiscoveryClientOptionalArgs;
+import com.sun.jersey.api.client.filter.ClientFilter;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: Seth
