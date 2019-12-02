@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8001
 spring:
   application:
     name: microservice-simple-provider-user
@@ -39,3 +39,4 @@ eureka:
     prefer-ip-address: true
     metadata-map:
       my-metadata: 我自定义的元数据
+    hostname: microservice-simple-provider-user

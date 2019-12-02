@@ -5,6 +5,8 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,12 +20,14 @@ import java.util.List;
  */
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class MicroserviceSimpleConsumerMovieApplication {
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//    @Bean
+//    @LoadBalanced
+//    public RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(MicroserviceSimpleConsumerMovieApplication.class, args);
