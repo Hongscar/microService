@@ -2,6 +2,7 @@ package basic.controller;
 
 import basic.domain.User;
 //import com.netflix.discovery.DiscoveryClient;
+import basic.utils.feign.UserFeignClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +28,32 @@ import java.util.List;
 public class MovieController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
 
     private DiscoveryClient discoveryClient;
 
     private LoadBalancerClient loadBalancerClient;
 
-    @Bean
-    @LoadBalanced
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
+    @Autowired
+    private UserFeignClient userFeignClient;
+
+//    @Bean
+//    public UserFeignClient userFeignClient() {
+//        return new UserFeignClient();
+//    }
+
+//    @Bean
+//    @LoadBalanced
+//    public RestTemplate getRestTemplate() {
+//        return new RestTemplate();
+//    }
 
     @Autowired
     public MovieController(DiscoveryClient discoveryClient, LoadBalancerClient loadBalancerClient) {
         this.discoveryClient = discoveryClient;
         this.loadBalancerClient = loadBalancerClient;
+        // this.restTemplate = restTemplate;
+        // this.userFeignClient = userFeignClient;
     }
 
     //    @Autowired
@@ -57,9 +67,14 @@ public class MovieController {
 //        this.restTemplate = restTemplate;
 //    }
 
+//    @GetMapping("/user/{id}")
+//    public User findById(@PathVariable Integer id) {
+//        return restTemplate.getForObject("http://microservice-simple-provider-user/" + id, User.class);
+//    }
+
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {
-        return restTemplate.getForObject("http://microservice-simple-provider-user/" + id, User.class);
+        return userFeignClient.findById(id);
     }
 
     @GetMapping("/user-instance")
