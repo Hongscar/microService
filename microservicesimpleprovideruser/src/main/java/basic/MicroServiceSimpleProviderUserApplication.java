@@ -19,11 +19,10 @@ import java.util.List;
 public class MicroServiceSimpleProviderUserApplication {
 
     @Bean
-    @SuppressWarnings("all")
     public DiscoveryClientOptionalArgs discoveryClientOptionalArgs() {
         DiscoveryClientOptionalArgs discoveryClientOptionalArgs = new DiscoveryClientOptionalArgs();
         List<ClientFilter> additionalFilters = new ArrayList<>();
-        additionalFilters.add(new HTTPBasicAuthFilter("hong", "kk123"));
+        additionalFilters.add(new HTTPBasicAuthFilter("hong", "root"));
         discoveryClientOptionalArgs.setAdditionalFilters(additionalFilters);
         return discoveryClientOptionalArgs;
     }

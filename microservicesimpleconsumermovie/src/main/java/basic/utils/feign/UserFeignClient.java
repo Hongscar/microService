@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Date: Created in 14:13 2019/12/3
  */
 
-@FeignClient(name = "microservice-simple-provider-user",
-        configuration = {FeignConfiguration.class, FooConfiguration.class})
+//@FeignClient(name = "microservice-simple-provider-user",
+//        configuration = {FeignConfiguration.class, FooConfiguration.class})
 public interface UserFeignClient {
     /*
             use the default annotation of feign @RequestLine
@@ -24,5 +24,5 @@ public interface UserFeignClient {
             @return user info
      */
     @RequestLine("GET /{id}")
-    public User findById(@Param("id") Integer id);
+    public User findById(@Param("id") String id);
 }

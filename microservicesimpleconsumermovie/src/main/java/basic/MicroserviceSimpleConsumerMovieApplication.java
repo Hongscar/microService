@@ -22,7 +22,7 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+//@EnableFeignClients
 public class MicroserviceSimpleConsumerMovieApplication {
 
 //    @Bean
