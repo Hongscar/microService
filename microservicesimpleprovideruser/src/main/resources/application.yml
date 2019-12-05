@@ -42,3 +42,4 @@ eureka:
     metadata-map:
       my-metadata: 我自定义的元数据
     hostname: microservice-simple-provider-user
+

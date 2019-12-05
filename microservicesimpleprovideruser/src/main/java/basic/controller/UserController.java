@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -31,6 +29,21 @@ public class UserController {
 //        User findOne = userRepository.findById(id).get();
 //        return findOne;
 //    }
+
+    @GetMapping("/get")
+    public User get1(User user) {
+        return user;
+    }
+
+    @PostMapping("/post")
+    public User post(@RequestBody User user) {
+        return user;
+    }
+
+    @GetMapping("/get333")
+    public User get333(User user) {
+        return user;
+    }
 
     @GetMapping("/{id}")
     public User findById(@PathVariable String id) {

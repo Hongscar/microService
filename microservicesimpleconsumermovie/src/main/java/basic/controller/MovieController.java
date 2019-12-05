@@ -2,7 +2,7 @@ package basic.controller;
 
 import basic.domain.User;
 //import com.netflix.discovery.DiscoveryClient;
-import basic.utils.feign.FeignConfiguration;
+//import basic.utils.feign.FeignConfiguration;
 import basic.utils.feign.FormEncoder;
 import basic.utils.feign.UserFeignClient;
 import feign.Client;
@@ -20,14 +20,15 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 import org.springframework.cloud.openfeign.FeignClientsConfiguration;
+//import org.springframework.cloud.netflix.feign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: Seth
@@ -35,7 +36,7 @@ import java.util.List;
  * @Date: Created in 11:02 2019/11/27
  */
 
-@Import(FeignClientsConfiguration.class)   // 使用Spring Cloud为Fiegn的默认配置类就好
+@Import(FeignClientsConfiguration.class)   // 使用Spring Cloud为Feign的默认配置类就好
 @RestController
 public class MovieController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
@@ -51,6 +52,7 @@ public class MovieController {
     private UserFeignClient adminUserFeignClient;
 
     private FormEncoder encoder;
+
 
     @Autowired
     public Encoder getEncoder() {
@@ -78,12 +80,12 @@ public class MovieController {
         this.loadBalancerClient = loadBalancerClient;
         // this.restTemplate = restTemplate;
         // this.userFeignClient = userFeignClient;
-        userUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).decoder(decoder).requestInterceptor(
-                new BasicAuthRequestInterceptor("user",
+        userUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).decoder(decoder).
+                requestInterceptor(new BasicAuthRequestInterceptor("user",
                 "password1")).target(UserFeignClient.class,
                 "http://microservice-simple-provider-user");
-        adminUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).
-                decoder(decoder).requestInterceptor(new BasicAuthRequestInterceptor("admin",
+        adminUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).decoder(decoder).
+                requestInterceptor(new BasicAuthRequestInterceptor("admin",
                 "kk123")).target(UserFeignClient.class, "http://microservice-simple-provider-user");
     }
 
@@ -99,6 +101,30 @@ public class MovieController {
         if ("favicon.ico".equals(id))
             return null;
         return adminUserFeignClient.findById(id);
+    }
+
+    /**
+     * 测试URL:http://localhost:8010/user/post?id=1&username=张三
+     * @param user user
+     * @return 用户信息
+     */
+    @GetMapping("/user/post")
+    public User post(User user) {
+        return this.userUserFeignClient.post(user);
+    }
+
+
+    /**
+     * 测试URL：http://localhost:8010/user/get2?name=kai&username=account3
+     * @param user user
+     * @return 用户信息
+     */
+    @GetMapping("/user/get2")
+    public User get2(User user) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", user.getName());
+        map.put("username", user.getUsername());
+        return this.userUserFeignClient.get2(map);
     }
 
     //    @Autowired
@@ -117,9 +143,30 @@ public class MovieController {
 //        return restTemplate.getForObject("http://microservice-simple-provider-user/" + id, User.class);
 //    }
 
-//    @GetMapping("/user/{id}")
-//    public User findById(@PathVariable Long id) {
-//        return userFeignClient.findById(id);
+    @GetMapping("/user/{id}")
+    public User findById(@PathVariable String id) {
+        return userUserFeignClient.findById(id);
+    }
+
+//    @RequestMapping(value = "/user/get1", method = RequestMethod.GET)
+//    public User get1(User user) {
+//        return userUserFeignClient.get1(user.getUsername(), user.getName());
+//    }
+
+//    @RequestMapping("/get/{username}/{name}")
+//    public User get(@PathVariable String username, @PathVariable String name) {
+//        HashMap<String, Object> map = new HashMap<>();
+//        map.put("username", username);
+//        map.put("name", name);
+//        return userFeignClient.get2(map);
+//    }
+
+//    @RequestMapping(value = "/user/get2", method = RequestMethod.GET)
+//    public User get2(User user) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("id", user.getId());
+//        map.put("username", user.getUsername());
+//        return this.userFeignClient.get2(map);
 //    }
 
     @GetMapping("/user-instance")
