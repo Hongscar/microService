@@ -15,7 +15,10 @@ import java.util.List;
  * @Description:
  * @Date: Created in 10:41 2019/11/27
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+        org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class}
+)
 public class MicroServiceSimpleProviderUserApplication {
 
     @Bean

@@ -2,6 +2,7 @@ package basic.utils.feign;
 
 import feign.Contract;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 
 /**
  * @Author: Seth

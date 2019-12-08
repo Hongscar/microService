@@ -5,12 +5,14 @@ import basic.domain.User;
 //import basic.utils.feign.FeignConfiguration;
 import basic.utils.feign.FormEncoder;
 import basic.utils.feign.UserFeignClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import feign.Client;
 import feign.Contract;
 import feign.Feign;
 import feign.auth.BasicAuthRequestInterceptor;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
+//import feign.hystrix.HystrixFeign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 //import org.springframework.cloud.netflix.feign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +49,7 @@ public class MovieController {
     private DiscoveryClient discoveryClient;
 
     private LoadBalancerClient loadBalancerClient;
+
 
     private UserFeignClient userUserFeignClient;
 
@@ -78,8 +82,19 @@ public class MovieController {
                            Client client, Decoder decoder) {
         this.discoveryClient = discoveryClient;
         this.loadBalancerClient = loadBalancerClient;
+//        userUserFeignClient = HystrixFeign.builder().encoder(getEncoder()).decoder(decoder).requestInterceptor(
+//                new BasicAuthRequestInterceptor("user", "password1")).
+//        target(UserFeignClient.class, "http://microservice-simple-provider-user");
+//
+//        adminUserFeignClient = HystrixFeign.builder().encoder(getEncoder()).decoder(decoder).requestInterceptor(
+//                new BasicAuthRequestInterceptor("admin", "kk123")
+//        ).target(UserFeignClient.class, "http://microservice-simple-provider-user");
+
         // this.restTemplate = restTemplate;
         // this.userFeignClient = userFeignClient;
+//        userUserFeignClient = Feign.builder().decoder(decoder).target(BasicAuthRequestInterceptor.class ,
+//                "http://microservice-simple-provider-user");
+
         userUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).decoder(decoder).
                 requestInterceptor(new BasicAuthRequestInterceptor("user",
                 "password1")).target(UserFeignClient.class,
@@ -105,7 +120,7 @@ public class MovieController {
 
     /**
      * 测试URL:http://localhost:8010/user/post?id=1&username=张三
-     * @param user user
+     * @param  user user
      * @return 用户信息
      */
     @GetMapping("/user/post")
@@ -116,7 +131,7 @@ public class MovieController {
 
     /**
      * 测试URL：http://localhost:8010/user/get2?name=kai&username=account3
-     * @param user user
+     * @param   user user
      * @return 用户信息
      */
     @GetMapping("/user/get2")
@@ -143,9 +158,22 @@ public class MovieController {
 //        return restTemplate.getForObject("http://microservice-simple-provider-user/" + id, User.class);
 //    }
 
+    @HystrixCommand(fallbackMethod = "findByIdFallback")
     @GetMapping("/user/{id}")
     public User findById(@PathVariable String id) {
+        if ("favicon.ico".equals(id))
+            return null;
         return userUserFeignClient.findById(id);
+    }
+
+    public User findByIdFallback(String id) {
+        User user = new User();
+        user.setId("-1");
+        user.setName("默认用户");
+        user.setAge(66);
+        user.setBalance(999);
+        user.setUsername("default");
+        return user;
     }
 
 //    @RequestMapping(value = "/user/get1", method = RequestMethod.GET)

@@ -1,5 +1,18 @@
 server:
   port: 8010
+#manager:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: all
+#    health:
+#      show-details: always
+#    shutdown:
+#      enabled: true
+management:
+  endpoint:
+    health:
+      show-details: always
 info:
   app:
     name: @project.artifactId@
@@ -9,16 +22,9 @@ info:
     java:
       source: @java.version@
       target: @java.version@
-manager:
-  endpoints:
-    web:
-      exposure:
-        include: all
-    health:
-      show-details: always
-    shutdown:
-      enabled: true
 feign:
+  hystrix:
+    enabled: true
   client:
     config:
       default:          # 改成 default 就是全局配置
@@ -34,6 +40,7 @@ feign:
 logging:
   level:
     basic.utils.feign.UserFeignClient: debug
+
 #spring:
 #  cloud:
 #    service-registry:
