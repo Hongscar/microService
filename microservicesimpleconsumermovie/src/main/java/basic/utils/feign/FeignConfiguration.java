@@ -1,5 +1,6 @@
 package basic.utils.feign;
 
+import com.netflix.hystrix.HystrixCommandProperties;
 import feign.Contract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -35,6 +36,13 @@ public class FeignConfiguration {
 
     @Bean
     public Contract feignContract() {
+        HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter();
+        setter.withExecutionTimeoutInMilliseconds(10000);
+        setter.withFallbackEnabled(true);
+        setter.withCircuitBreakerEnabled(true);
+
         return new feign.Contract.Default();
     }
+
+
 }

@@ -40,6 +40,14 @@ feign:
 logging:
   level:
     basic.utils.feign.UserFeignClient: debug
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
 
 #spring:
 #  cloud:

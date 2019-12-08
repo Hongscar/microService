@@ -5,7 +5,7 @@ import basic.domain.User;
 //import basic.utils.feign.FeignConfiguration;
 import basic.utils.feign.FormEncoder;
 import basic.utils.feign.UserFeignClient;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import feign.Client;
 import feign.Contract;
 import feign.Feign;
@@ -13,6 +13,7 @@ import feign.auth.BasicAuthRequestInterceptor;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 //import feign.hystrix.HystrixFeign;
+import feign.hystrix.HystrixFeign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,8 @@ import java.util.Map;
  * @Date: Created in 11:02 2019/11/27
  */
 
+// PS:在构造方法里构建了多个FeignClient(而且是同一个
+
 @Import(FeignClientsConfiguration.class)   // 使用Spring Cloud为Feign的默认配置类就好
 @RestController
 public class MovieController {
@@ -48,7 +51,7 @@ public class MovieController {
 
     private DiscoveryClient discoveryClient;
 
-    private LoadBalancerClient loadBalancerClient;
+//    private LoadBalancerClient loadBalancerClient;
 
 
     private UserFeignClient userUserFeignClient;
@@ -78,10 +81,10 @@ public class MovieController {
 //    }
 
     @Autowired
-    public MovieController(DiscoveryClient discoveryClient, LoadBalancerClient loadBalancerClient,
+    public MovieController(DiscoveryClient discoveryClient,
                            Client client, Decoder decoder) {
         this.discoveryClient = discoveryClient;
-        this.loadBalancerClient = loadBalancerClient;
+//        this.loadBalancerClient = loadBalancerClient;
 //        userUserFeignClient = HystrixFeign.builder().encoder(getEncoder()).decoder(decoder).requestInterceptor(
 //                new BasicAuthRequestInterceptor("user", "password1")).
 //        target(UserFeignClient.class, "http://microservice-simple-provider-user");
@@ -95,11 +98,11 @@ public class MovieController {
 //        userUserFeignClient = Feign.builder().decoder(decoder).target(BasicAuthRequestInterceptor.class ,
 //                "http://microservice-simple-provider-user");
 
-        userUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).decoder(decoder).
+        userUserFeignClient = HystrixFeign.builder().client(client).decoder(decoder).
                 requestInterceptor(new BasicAuthRequestInterceptor("user",
                 "password1")).target(UserFeignClient.class,
                 "http://microservice-simple-provider-user");
-        adminUserFeignClient = Feign.builder().client(client).encoder(getEncoder()).decoder(decoder).
+        adminUserFeignClient = HystrixFeign.builder().client(client).decoder(decoder).
                 requestInterceptor(new BasicAuthRequestInterceptor("admin",
                 "kk123")).target(UserFeignClient.class, "http://microservice-simple-provider-user");
     }
@@ -158,7 +161,7 @@ public class MovieController {
 //        return restTemplate.getForObject("http://microservice-simple-provider-user/" + id, User.class);
 //    }
 
-    @HystrixCommand(fallbackMethod = "findByIdFallback")
+//    @HystrixCommand(fallbackMethod = "findByIdFallback")
     @GetMapping("/user/{id}")
     public User findById(@PathVariable String id) {
         if ("favicon.ico".equals(id))
@@ -202,11 +205,11 @@ public class MovieController {
         return discoveryClient.getInstances("microservice-simple-provider-user");
     }
 
-    @GetMapping("/log-user-instance")
-    public void logUserInstance() {
-        ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-simple-provider-user");
-        MovieController.LOGGER.info("{}:{}:{}", serviceInstance.getServiceId(),
-                serviceInstance.getHost(), serviceInstance.getPort());
-    }
+//    @GetMapping("/log-user-instance")
+//    public void logUserInstance() {
+//        ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-simple-provider-user");
+//        MovieController.LOGGER.info("{}:{}:{}", serviceInstance.getServiceId(),
+//                serviceInstance.getHost(), serviceInstance.getPort());
+//    }
 
 }

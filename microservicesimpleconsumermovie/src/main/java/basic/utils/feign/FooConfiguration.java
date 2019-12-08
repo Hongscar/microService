@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean;
 // when we need to add Interceptor for Feign, we need it to add the Http Basic auth.
 public class FooConfiguration {
 
-    //@Bean
+    @Bean
     public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-        return new BasicAuthRequestInterceptor("user", "password");
+        return new BasicAuthRequestInterceptor("admin", "kk123");
     }
 }
