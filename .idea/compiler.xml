@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="microservicediscoveryeureka" />
         <module name="microserviceeureka" />
+        <module name="microservicehystrixdashboard" />
+        <module name="microservicehystrixturbine" />
         <module name="microservicesimpleconsumermovie" />
         <module name="microservicesimpleprovideruser" />
       </profile>
@@ -16,6 +18,8 @@
       <module name="demo" target="1.8" />
       <module name="microservicediscoveryeureka" target="1.8" />
       <module name="microserviceeureka" target="1.8" />
+      <module name="microservicehystrixdashboard" target="1.8" />
+      <module name="microservicehystrixturbine" target="1.8" />
       <module name="microservicesimpleconsumermovie" target="1.8" />
       <module name="microservicesimpleprovideruser" target="1.8" />
       <module name="testeureka" target="1.8" />

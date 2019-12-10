@@ -42,7 +42,7 @@ import java.util.Map;
 
 // PS:在构造方法里构建了多个FeignClient(而且是同一个
 
-@Import(FeignClientsConfiguration.class)   // 使用Spring Cloud为Feign的默认配置类就好
+@Import({FeignClientsConfiguration.class})   // 使用Spring Cloud为Feign的默认配置类就好
 @RestController
 public class MovieController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);

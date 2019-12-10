@@ -38,6 +38,8 @@
         <module>microservicesimpleprovideruser</module>
         <module>microservicesimpleconsumermovie</module>
         <module>microserviceeureka</module>
+        <module>microservicehystrixturbine</module>
+        <module>microservicehystrixdashboard</module>
     </modules>
 
 

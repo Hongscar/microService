@@ -1,5 +1,8 @@
 server:
-  port: 8010
+  port: 8011
+spring:
+  application:
+    name: microservice-simple-consumer-user
 #manager:
 #  endpoints:
 #    web:
@@ -47,8 +50,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
-
-
 #spring:
 #  cloud:
 #    service-registry:

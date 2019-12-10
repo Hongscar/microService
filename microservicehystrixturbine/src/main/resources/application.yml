@@ -1,0 +1,15 @@
+server:
+  port: 8031
+spring:
+  application:
+    name: microservice-hystrix-turbine
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+turbine:
+  app-config: microservice-simple-consumer-user
+  cluster-name-expression: "'default'"
+  instanceUrlSuffix: /hystrix.stream  #没有的话会出现异常

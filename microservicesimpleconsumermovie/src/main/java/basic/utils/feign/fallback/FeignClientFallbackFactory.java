@@ -26,7 +26,10 @@ public class FeignClientFallbackFactory implements FallbackFactory<UserFeignClie
 
             @Override
             public User findById(String id) {
-                FeignClientFallbackFactory.LOGGER.info("fallback; reason was: ", throwable);
+                FeignClientFallbackFactory.LOGGER.info("fallback; reason was: ", throwable.toString());
+                System.out.println("------");
+                throwable.printStackTrace();
+                System.out.println("------");
                 User user = new User();
                 user.setId("-122");
                 user.setName("默认用户");
