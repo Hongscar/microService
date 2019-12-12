@@ -3,6 +3,22 @@ server:
 spring:
   application:
     name: microservice-simple-consumer-user
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        hystrixStreamOutput:
+          destination: sixfly
+#  cloud:
+#    stream:
+#      default-binder: rabbitmq
+#  cloud:
+#    stream:
+#      override-cloud-connectors: true
 #manager:
 #  endpoints:
 #    web:
@@ -50,6 +66,7 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+
 #spring:
 #  cloud:
 #    service-registry:

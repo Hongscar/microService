@@ -3,13 +3,25 @@ server:
 spring:
   application:
     name: microservice-hystrix-turbine
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        turbineStreamInput:
+          destination: sixfly
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
-turbine:
-  app-config: microservice-simple-consumer-user
-  cluster-name-expression: "'default'"
-  instanceUrlSuffix: /hystrix.stream  #没有的话会出现异常
+#turbine:
+#  instanceUrlSuffix: /hystrix.stream
+#turbine:
+##  app-config: microservice-simple-consumer-user
+#  cluster-name-expression: "'default'"
+#  instanceUrlSuffix: /hystrix.stream  #没有的话会出现异常

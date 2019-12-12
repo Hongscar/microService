@@ -10,7 +10,8 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 //import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 //import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 //import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.netflix.turbine.EnableTurbine;
+//import org.springframework.cloud.netflix.turbine.EnableTurbine;
+import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.List;
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
         org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class}
 )
-@EnableTurbine
+@EnableTurbineStream
 public class TurbineApplication {
 
     @Bean

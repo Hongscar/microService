@@ -1,9 +1,21 @@
 package basic.utils.feign;
 
+import basic.controller.TestController;
+import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandProperties;
+import com.netflix.hystrix.HystrixThreadPoolProperties;
 import feign.Contract;
+import feign.Feign;
+import feign.Target;
+import feign.hystrix.HystrixFeign;
+import feign.hystrix.SetterFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
+
+import java.lang.reflect.Method;
 
 /**
  * @Author: Seth
@@ -36,12 +48,35 @@ public class FeignConfiguration {
 
     @Bean
     public Contract feignContract() {
-        HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter();
-        setter.withExecutionTimeoutInMilliseconds(10000);
-        setter.withFallbackEnabled(true);
-        setter.withCircuitBreakerEnabled(true);
 
         return new feign.Contract.Default();
+    }
+
+    //@Bean
+    //@Scope("prototype")
+    //@ConditionalOnMissingBean
+    public Feign.Builder feignHystrixBuilder() {
+        return HystrixFeign.builder().setterFactory((target, method) -> {
+            HystrixCommandProperties.Setter setter = HystrixCommandProperties.Setter();
+            setter.withExecutionTimeoutInMilliseconds(4000);
+            setter.withFallbackEnabled(true);
+            setter.withCircuitBreakerEnabled(true);
+            setter.withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD);
+            setter.withCircuitBreakerRequestVolumeThreshold(10);
+            setter.withCircuitBreakerErrorThresholdPercentage(40);
+
+            HystrixThreadPoolProperties.Setter threadSetter = HystrixThreadPoolProperties.Setter();
+            threadSetter.withCoreSize(1);
+            threadSetter.withMaxQueueSize(10);
+            threadSetter.withKeepAliveTimeMinutes(1000);
+            threadSetter.withQueueSizeRejectionThreshold(8);
+            threadSetter.withMetricsRollingStatisticalWindowBuckets(12);
+            threadSetter.withMetricsRollingStatisticalWindowInMilliseconds(1440);
+
+            return HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(
+                    TestController.class.getSimpleName())).andCommandPropertiesDefaults(setter).
+                    andThreadPoolPropertiesDefaults(threadSetter);
+        });
     }
 
 
