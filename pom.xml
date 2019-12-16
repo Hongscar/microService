@@ -40,6 +40,7 @@
         <module>microserviceeureka</module>
         <module>microservicehystrixturbine</module>
         <module>microservicehystrixdashboard</module>
+        <module>microservicegatewayzuul</module>
     </modules>
 
 

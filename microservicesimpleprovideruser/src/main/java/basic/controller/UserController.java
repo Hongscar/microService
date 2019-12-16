@@ -5,9 +5,9 @@ import basic.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -49,18 +49,18 @@ public class UserController {
     public User findById(@PathVariable String id) {
         if ("favicon.ico".equals(id))
             return null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            UserDetails user = (UserDetails) principal;
-            Collection<? extends GrantedAuthority> collection = user.getAuthorities();
-            for (GrantedAuthority c: collection) {
-                // print the current user information
-                UserController.LOGGER.info("当前用户是{}, 角色是{}", user.getUsername(), c.getAuthority());
-            }
-        }
-        else {
-            // do other things
-        }
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (principal instanceof UserDetails) {
+//            UserDetails user = (UserDetails) principal;
+//            Collection<? extends GrantedAuthority> collection = user.getAuthorities();
+//            for (GrantedAuthority c: collection) {
+//                // print the current user information
+//                UserController.LOGGER.info("当前用户是{}, 角色是{}", user.getUsername(), c.getAuthority());
+//            }
+//        }
+//        else {
+//            // do other things
+//        }
         User findOne = this.userRepository.findById(id).get();
         return findOne;
 

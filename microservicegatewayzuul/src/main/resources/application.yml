@@ -1,0 +1,25 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+#  security:
+#    user:
+#      name: zuul1
+#      password: zuul2
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+#zuul:
+#  routes:
+#    microservice-simple-consumer-movie:
+
+#zuul:
+#  routes:
+#    api:
+#      path: /api1/**
+#      url: http://admin:kk123@localhost:8011/microservice-simple-consumer-movie/
+#  ignore-local-service: false
+#zuul:
+#  ignore-local-service: false
