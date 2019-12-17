@@ -1,19 +1,25 @@
 server:
   port: 8040
+
 spring:
   application:
     name: microservice-gateway-zuul
-#  security:
-#    user:
-#      name: zuul1
-#      password: zuul2
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-#zuul:
-#  routes:
-#    microservice-simple-consumer-movie:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+zuul:
+  routes:
+    microservice-simple-consumer-user: /user111/**
+  ignored-services: microservice-simple-consumer-user
+  ignored-patterns: /**/user/**    # 忽略所有包含admin的路径
 
 #zuul:
 #  routes:
