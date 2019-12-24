@@ -19,7 +19,13 @@ zuul:
   routes:
     microservice-simple-consumer-user: /user111/**
   ignored-services: microservice-simple-consumer-user
-  ignored-patterns: /**/user/**    # 忽略所有包含admin的路径
+  ignored-patterns: /**/user/**       # 忽略所有包含admin的路径
+  ribbon-isolation-strategy: thread
+
+sidecar:
+  port: 8060
+  health-uri: http://localhost:8060/health.json
+
 
 #zuul:
 #  routes:
