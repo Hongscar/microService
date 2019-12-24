@@ -3,6 +3,7 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microserviceeureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservicefileupload" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservicegatewayzuul" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservicehystrixdashboard" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservicehystrixturbine" charset="UTF-8" />

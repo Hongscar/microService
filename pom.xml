@@ -41,6 +41,7 @@
         <module>microservicehystrixturbine</module>
         <module>microservicehystrixdashboard</module>
         <module>microservicegatewayzuul</module>
+        <module>microservicefileupload</module>
     </modules>
 
 
