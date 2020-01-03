@@ -175,7 +175,7 @@ public class MovieController {
         user.setName("默认用户");
         user.setAge(66);
         user.setBalance(999);
-        user.setUsername("default");
+        user.setUsername("basic");
         return user;
     }
 

@@ -15,7 +15,7 @@ spring:
           destination: sixfly
 #  cloud:
 #    stream:
-#      default-binder: rabbitmq
+#      basic-binder: rabbitmq
 #  cloud:
 #    stream:
 #      override-cloud-connectors: true
@@ -46,7 +46,7 @@ feign:
     enabled: true
   client:
     config:
-      default:          # 改成 default 就是全局配置
+      default:          # 改成 basic 就是全局配置
 #        connectTimeout: 5000
 #        readTimeout: 5000
         loggerLevel: full

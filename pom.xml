@@ -42,6 +42,8 @@
         <module>microservicehystrixdashboard</module>
         <module>microservicegatewayzuul</module>
         <module>microservicefileupload</module>
+        <module>microserviceconfigserver</module>
+        <module>microserviceconfigclient</module>
     </modules>
 
 

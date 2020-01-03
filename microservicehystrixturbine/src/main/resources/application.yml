@@ -23,5 +23,5 @@ eureka:
 #  instanceUrlSuffix: /hystrix.stream
 #turbine:
 ##  app-config: microservice-simple-consumer-user
-#  cluster-name-expression: "'default'"
+#  cluster-name-expression: "'basic'"
 #  instanceUrlSuffix: /hystrix.stream  #没有的话会出现异常

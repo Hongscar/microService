@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
  */
 
 /*      Feign Default Configuration. copy from Spring cloud document.
-Spring Cloud Netflix provides the following beans by default for feign (BeanType beanName: ClassName):
+Spring Cloud Netflix provides the following beans by basic for feign (BeanType beanName: ClassName):
 
 Decoder feignDecoder: ResponseEntityDecoder (which wraps a SpringDecoder)
 
@@ -38,7 +38,7 @@ Feign.Builder feignBuilder: HystrixFeign.Builder
 
 Client feignClient: if Ribbon is in the classpath and is enabled it is a LoadBalancerFeignClient,
  otherwise if Spring Cloud LoadBalancer is in the classpath, FeignBlockingLoadBalancerClient is used.
-  If none of them is in the classpath, the default feign client is used.
+  If none of them is in the classpath, the basic feign client is used.
 
  */
 

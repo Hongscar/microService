@@ -28,7 +28,4 @@ public class GetExample {
         String response = example.run("https://github.com/Hongscar/blog/blob/master/README.md");
         System.out.println(response);
     }
-
-
-
 }

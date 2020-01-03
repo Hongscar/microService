@@ -7,6 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="microservice-file-upload" />
+        <module name="microserviceconfigclient" />
+        <module name="microserviceconfigserver" />
         <module name="microservicediscoveryeureka" />
         <module name="microserviceeureka" />
         <module name="microservicegatewayzuul" />
@@ -19,6 +21,8 @@
     <bytecodeTargetLevel>
       <module name="demo" target="1.8" />
       <module name="microservice-file-upload" target="1.8" />
+      <module name="microserviceconfigclient" target="1.8" />
+      <module name="microserviceconfigserver" target="1.8" />
       <module name="microservicediscoveryeureka" target="1.8" />
       <module name="microserviceeureka" target="1.8" />
       <module name="microservicegatewayzuul" target="1.8" />

@@ -11,12 +11,12 @@ spring:
     name: microservice-file-upload
   servlet:
     multipart:
-      max-file-size: 200MB      # default 1M
-      max-request-size: 300MB   # default 10M
+      max-file-size: 200MB      # basic 1M
+      max-request-size: 300MB   # basic 10M
 
 #hystix:
 #  command:
-#    default:
+#    basic:
 #      execution:
 #        isolation:
 #          thread:

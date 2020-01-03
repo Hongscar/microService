@@ -23,7 +23,7 @@ import java.util.Map;
 //configuration = {FeignConfiguration.class, FooConfiguration.class}
 public interface UserFeignClient {
     /*
-            use the default annotation of feign @RequestLine
+            use the basic annotation of feign @RequestLine
             @see https://github.com/OpenFeign/feign
             @param id user id
             @return user info

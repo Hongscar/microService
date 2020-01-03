@@ -35,7 +35,7 @@ public class FeignClientFallbackFactory implements FallbackFactory<UserFeignClie
                 user.setName("默认用户");
                 user.setAge(66);
                 user.setBalance(999);
-                user.setUsername("default");
+                user.setUsername("basic");
                 return user;
             }
 
@@ -46,7 +46,7 @@ public class FeignClientFallbackFactory implements FallbackFactory<UserFeignClie
                 user.setName("默认用户");
                 user.setAge(66);
                 user.setBalance(999);
-                user.setUsername("default");
+                user.setUsername("basic");
                 return user;
             }
 
@@ -56,7 +56,7 @@ public class FeignClientFallbackFactory implements FallbackFactory<UserFeignClie
                 user.setName("默认用户");
                 user.setAge(66);
                 user.setBalance(999);
-                user.setUsername("default");
+                user.setUsername("basic");
                 return user;
             }
         };
