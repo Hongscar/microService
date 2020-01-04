@@ -7,3 +7,10 @@ spring:
         # profile对应config server所获取的配置文件中的{profile}
       profile: dev
       label: master   # git repository的branch
+#      discovery:
+#        enabled: true
+#        service-id: configserver
+
+
+
+

@@ -1,18 +1,15 @@
-server:
-  port: 8080
-spring:
-  application:
-    name: microservice-config-server
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://gitee.com/itmuch/spring-cloud-config-repo
-          # https://github.com/Hongscar/microService
-          search-paths: config-repo
-          username:
-          password:
+#encrypt:
+##  key: foo  # 对称加密密钥
+#  key-store:
+#    location: classpath:server.jks    # jks文件的路径
+#    password: letmein                 # storepass
+#    alias: mytestkey                  # alias
+##    secret: changeme                 # keypass
+
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    appname: configserver
+
